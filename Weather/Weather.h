@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Location.h"
 
 @interface Weather : UIViewController <UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource,  NSFileManagerDelegate> {
     

@@ -7,7 +7,7 @@
 //
 
 #import "Weather.h"
-#import "Location.h"
+
 
 #import "WeatherCell.h"
 #import "WeatherCollectionViewCell.h"
@@ -35,8 +35,13 @@
     NSDictionary *savedValue = [[NSUserDefaults standardUserDefaults]
                                 objectForKey:@"userLocationData"];
     
-    NSString *api = [NSString stringWithFormat:@"%s/%s",BaseUrl ,APIKEY];
-    urlStr = [NSString stringWithFormat: @"%@/%@,%@",api,savedValue [@"lattitude"],savedValue [@"longitude"]];
+    NSLog(@"%@",savedValue);
+    NSString *api = [NSString stringWithFormat:@"%s/%s",BaseUrl,APIKEY];
+    NSString *lattitude = savedValue [@"lattitude"];
+    NSString *longitude = savedValue [@"longitude"];
+
+    
+    urlStr = [NSString stringWithFormat: @"%@/%@,%@",api,lattitude,longitude];
     
     NSURLSession* session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     [[session dataTaskWithURL:[NSURL URLWithString:urlStr]
@@ -89,17 +94,17 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     WeatherCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WeatherCollectionViewCellID" forIndexPath:indexPath];
-    
-    if (indexPath.row == 0)
-    {
-        cell.weatherCollectionHourlyLabel.text = @"Now";
-    }
-    else
-    {
-        cell.weatherCollectionHourlyLabel.text = timeArray [indexPath.row];
-    }
-    cell.weatherCollectionTemp.text = hourlyTempArray [indexPath.row];
-    cell.weatherCollectionIcon.image = [UIImage imageNamed:hourlyClimateImageArray [indexPath.row]];
+//    
+//    if (indexPath.row == 0)
+//    {
+//        cell.weatherCollectionHourlyLabel.text = @"Now";
+//    }
+//    else
+//    {
+//        cell.weatherCollectionHourlyLabel.text = timeArray [indexPath.row];
+//    }
+//    cell.weatherCollectionTemp.text = hourlyTempArray [indexPath.row];
+//    cell.weatherCollectionIcon.image = [UIImage imageNamed:hourlyClimateImageArray [indexPath.row]];
     return cell;
 }
 
